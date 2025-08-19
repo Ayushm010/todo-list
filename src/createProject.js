@@ -1,7 +1,7 @@
-export function createProject(uId) {
-    return {
-        projectName: "",
-        taskIds: [],
-        projectId: uId,
-    }
+export function createProject() {
+  return {
+    projectName: "",
+    taskIds: [],
+    projectId: crypto.randomUUID(), 
+  };
 }

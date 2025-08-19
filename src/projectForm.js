@@ -1,7 +1,10 @@
 import { addProject } from "./addProjects";
+import { createProject } from "./createProject";
 
-export function createProjectForm(newProject) {
-  const sidebar = document.querySelector(".sidebar"); 
+export function createProjectForm(projectArr) {
+  if (document.querySelector(".project-form")) return; // This will prevent multiple forms from opening at the same time
+
+  const sidebar = document.querySelector(".sidebar");
 
   // Create the form
   const form = document.createElement("form");
@@ -27,8 +30,16 @@ export function createProjectForm(newProject) {
   // Handle form submit
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    newProject.projectName = inputElement.value;
-    addProject(newProject);
+    const newProject = createProject();// creates object for newproject
+
+    if (inputElement.value.trim() === "") return;// prevents from adding to the array if the input is empty
+
+    newProject.projectName = inputElement.value.trim();// trims all the white spaces
+
+    projectArr.push(newProject);
+
+    addProject(newProject);// calls the addProject function which adds the newProject to the sidebar
+    
     form.remove(); //  remove form after adding
   });
 
