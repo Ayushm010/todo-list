@@ -1,26 +1,39 @@
 import { addProject } from "./addProjects";
-export function createProjectForm() {
-   const dialog = document.querySelector("dialog");
-    const showButton = document.querySelector(".project-btn");
-    const addButton = document.querySelector(".add-btn");
-    const closeButton = document.querySelector(".close-btn");
 
-    // Show the dialog box
-    showButton.addEventListener("click", () => {
-        dialog.showModal();
-    });
+export function createProjectForm(newProject) {
+  const sidebar = document.querySelector(".sidebar"); 
 
-    addButton.addEventListener("click",()=>{
-        const inputElement = document.querySelector("#project-name");
-        const projectName = inputElement.value;
-        console.log(projectName);
-        //This should add the project to the Projects div
-        addProject(projectName);
-        dialog.close();
-    });
+  // Create the form
+  const form = document.createElement("form");
+  form.classList.add("project-form");
 
-    // "Close" button closes the dialog
-    closeButton.addEventListener("click", () => {
-        dialog.close();
-    });
+  const inputElement = document.createElement("input");
+  inputElement.type = "text";
+  inputElement.placeholder = "Project name";
+
+  const addButton = document.createElement("button");
+  addButton.type = "submit";
+  addButton.textContent = "Add";
+
+  const closeButton = document.createElement("button");
+  closeButton.type = "button";
+  closeButton.textContent = "Close";
+
+  form.appendChild(inputElement);
+  form.appendChild(addButton);
+  form.appendChild(closeButton);
+  sidebar.appendChild(form); // appends to the sidebar
+
+  // Handle form submit
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    newProject.projectName = inputElement.value;
+    addProject(newProject);
+    form.remove(); //  remove form after adding
+  });
+
+  // Handle close
+  closeButton.addEventListener("click", () => {
+    form.remove(); // removes the form
+  });
 }

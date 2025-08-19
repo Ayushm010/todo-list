@@ -6,5 +6,6 @@ export function createTodoList(title,description,priority,notes,checklist) {
         priority: priority,
         notes: notes,
         checklist:checklist,
+        taskId:taskId,
     }
 }

@@ -1,2 +1,3 @@
-import { createProjectForm } from "./projectForm";
-createProjectForm();
+import "./style.css"
+import { allProjects } from "./allProjects";
+allProjects();

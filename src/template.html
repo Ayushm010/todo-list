@@ -4,38 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ToDo List</title>
 </head>
 
 <body>
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <h1>ToDo-List</h1>
-        </div>
-        <div class="projects">
-            <div class="project1">Home</div>
-            <div class="project2">College</div>
-            <div class="project3">Gym</div>
+    <div class="main-grid">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1>ToDo-List</h1>
+                <h2>Projects</h2>
+            </div>
+            <div class="projects-list">
+
+            </div>
+
+            <button class="add-project-btn">+ Add Project</button>
         </div>
 
-        <div class="add-project">
-            <dialog>
-             
-                    <label for="project-name">Project Name: </label>
-                    <input type="text" name="project-name" id="project-name" required>
-                    <button class="add-btn">Add</button>
-                    <button class="close-btn">Cancel</button>
-               
-            </dialog>
-            <button class="project-btn">+ Add Project</button>
-        </div>
-    </div>
-
-    <div class="todo-grid">
-        <div class="project-name">
-            <h1>
-
-            </h1>
+        <div class="todo-grid">
+            <h1 class="project-name">No project</h1>
+            <button class="add-task">+add task</button>
         </div>
     </div>
 </body>
