@@ -1,4 +1,4 @@
-export function createTodoList(title,description,priority,notes,checklist) {
+export function createTodoList(title,description,priority,notes,checklist,projectId) {
     return {
         title: title,
         description: description,
@@ -6,6 +6,6 @@ export function createTodoList(title,description,priority,notes,checklist) {
         priority: priority,
         notes: notes,
         checklist:checklist,
-        taskId:taskId,
+        projectId: projectId,
     }
 }
