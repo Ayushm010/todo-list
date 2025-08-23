@@ -1,4 +1,4 @@
-import { todoStore } from "./todoStore";
+import { todoStore ,projectArr} from "./todoStore";
 
 // function to create a new task object
 export function createTask(title, description, priority, checklist, projectId) {
@@ -8,11 +8,12 @@ export function createTask(title, description, priority, checklist, projectId) {
         priority: priority,
         checklist: checklist,
         projectId: projectId,
+        taskId:crypto.randomUUID,
     };
 }
 
 // function to add tasks into the DOM grid
-export function addTask(projectId) {
+export function addTask(projectId,taskId) {
     const taskGrid = document.querySelector(".task-grid");
     taskGrid.innerHTML = "";
 
@@ -21,6 +22,7 @@ export function addTask(projectId) {
     for (let i = 0; i < filteredTodoStore.length; i++) {
         const task = document.createElement("div");
         task.classList.add("task");
+        task.id = todoStore[i].taskId;
 
         const taskName = document.createElement("p");
         taskName.textContent = filteredTodoStore[i].title;
@@ -34,9 +36,13 @@ export function addTask(projectId) {
         console.log(filteredTodoStore[i]);
     }
 }
-export function onClickTask(projectId){
-
+export function onClickTask(projectId,taskId){
+  
 }
-export function removeTask(projectId) {// When remove task button is clicked
-
+export function removeTask(projectId,taskId) {// When remove task button is clicked
+const taskIdx = todoStore.findIndex(task => task.taskId === taskId);
+  if (taskIdx !== -1) {
+    todoStore.splice(taskIdx, 1);
+  }
+  addTask(projectId);
 }

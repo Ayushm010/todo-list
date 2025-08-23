@@ -24,20 +24,23 @@ todoStore.push(
     description: "Milk, Eggs, Bread, and Fruits",
     priority: "medium",
     checklist: false,
-    projectId: "default-project-1"
+    projectId: "default-project-1",
+    taskId: "default-task-1"
   },
   {
     title: "Morning workout",
     description: "30 minutes cardio",
     priority: "high",
     checklist: false,
-    projectId: "default-project-1"
+    projectId: "default-project-1",
+     taskId: "default-task-1"
   },
   {
     title: "Finish report",
     description: "Prepare quarterly report for meeting",
     priority: "high",
     checklist: false,
-    projectId: "default-project-2"
+    projectId: "default-project-2",
+     taskId: "default-task-2"
   }
 );

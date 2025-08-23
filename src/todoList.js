@@ -1,6 +1,8 @@
 import { addTask } from "./tasks";
 import { createTaskForm } from "./taskForm";
-import { todoStore } from "./todoStore";
+import { todoStore ,projectArr} from "./todoStore";
+import { onClickTask } from "./tasks";
+import { removeTask } from "./tasks";
 
 export function createTodoList( projectId) {
 
@@ -15,7 +17,17 @@ export function createTodoList( projectId) {
     };
 
     addTask(projectId);
-
+  const taskGrid = document.querySelector(".task-grid");
+     
+      taskGrid.onclick = (event) => {
+        const taskDiv = event.target.closest(".task");
+        if (!taskDiv) return;
     
+        if (event.target.classList.contains("remove-task-button")) {
+          removeTask(projectId,taskDiv.id);
+        } else {
+          onClickTask(taskDiv.id);
+        }
+      };
 
 }
