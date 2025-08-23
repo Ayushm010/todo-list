@@ -20,6 +20,16 @@ form {
     border-right: 1px solid black;
 }
 
+.project {
+    display: flex;
+    gap: 20px;
+}
+
+
+.task{
+    display: flex;
+    gap: 20px;
+}
 .task-form {
     height: 400px;
     width: 400px;
@@ -38,4 +48,11 @@ form {
     background: white;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     z-index: 1000;
+}
+
+
+.remove-project-button,.remove-task-button{
+  background-color: transparent;
+  border: none; 
+
 }

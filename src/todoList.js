@@ -2,7 +2,7 @@ import { addTask } from "./tasks";
 import { createTaskForm } from "./taskForm";
 import { todoStore } from "./todoStore";
 
-export function createTodoList(projectArr, projectId) {
+export function createTodoList( projectId) {
 
     const openForm = document.querySelector(".task-form");
     if (openForm) openForm.remove();
@@ -15,5 +15,7 @@ export function createTodoList(projectArr, projectId) {
     };
 
     addTask(projectId);
+
+    
 
 }
