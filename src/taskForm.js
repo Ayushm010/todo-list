@@ -1,7 +1,5 @@
 // createTaskForm.js
-import { addTask } from "./addTask";
-import { createTask } from "./createTask";
-
+import { addTask, createTask } from "./tasks";
 export function createTaskForm(todoList, projectId) {
     if (document.querySelector(".task-form")) return; // prevent multiple forms
     const todoContainer = document.querySelector(".todo-container");

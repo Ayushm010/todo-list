@@ -1,5 +1,4 @@
-import { addProject } from "./addProjects";
-import { createProject } from "./createProject";
+import { addProject, createProject } from "./projects";
 
 export function createProjectForm(projectArr) {
   if (document.querySelector(".project-form")) return; // This will prevent multiple forms from opening at the same time

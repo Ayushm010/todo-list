@@ -1,3 +1,4 @@
+import { addTask } from "./tasks";
 import { createTaskForm } from "./taskForm";
 import { todoStore } from "./todoStore";
 
@@ -13,8 +14,6 @@ export function createTodoList(projectArr, projectId) {
         createTaskForm(todoStore, projectId);
     };
 
-    
-    const taskGrid = document.querySelector(".task-grid");
-    taskGrid.innerHTML = "";
-   
+    addTask(projectId);
+
 }
