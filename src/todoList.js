@@ -24,7 +24,7 @@ export function createTodoList( projectId) {
         if (!taskDiv) return;
     
         if (event.target.classList.contains("remove-task-button")) {
-          removeTask(projectId,taskDiv.id);
+          removeTask(taskDiv.id);
         } else {
           onClickTask(taskDiv.id);
         }

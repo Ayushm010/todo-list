@@ -25,7 +25,7 @@ todoStore.push(
     priority: "medium",
     checklist: false,
     projectId: "default-project-1",
-    taskId: "default-task-1"
+    taskId: "default-task-1.1"
   },
   {
     title: "Morning workout",
@@ -33,7 +33,7 @@ todoStore.push(
     priority: "high",
     checklist: false,
     projectId: "default-project-1",
-     taskId: "default-task-1"
+    taskId: "default-task-1.2"
   },
   {
     title: "Finish report",
@@ -41,6 +41,6 @@ todoStore.push(
     priority: "high",
     checklist: false,
     projectId: "default-project-2",
-     taskId: "default-task-2"
+    taskId: "default-task-2.1"
   }
 );

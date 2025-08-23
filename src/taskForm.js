@@ -56,7 +56,8 @@ export function createTaskForm(todoList, projectId) {
             description.value,
             priority.value,
             checkbox.checked,
-            projectId
+            projectId,
+            crypto.randomUUID()
         );
         todoList.push(newTask);
         addTask(projectId);

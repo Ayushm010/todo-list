@@ -19,14 +19,18 @@ form {
     height: 100vh;
     border-right: 1px solid black;
 }
-
+.button-box{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
 .project {
     display: flex;
     gap: 20px;
 }
 
 
-.task{
+.head-section{
     display: flex;
     gap: 20px;
 }
@@ -51,7 +55,7 @@ form {
 }
 
 
-.remove-project-button,.remove-task-button{
+.remove-project-button,.remove-task-button,.sidebar-button{
   background-color: transparent;
   border: none; 
 
