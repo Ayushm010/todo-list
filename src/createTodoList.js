@@ -1,13 +1,20 @@
 import { createTaskForm } from "./taskForm";
+import { todoStore } from "./todoStore";
+
 export function createTodoList(projectArr, projectId) {
-    let todoList = [];
+
+    const openForm = document.querySelector(".task-form");
+    if (openForm) openForm.remove();
+
     const showButton = document.querySelector(".add-task");
-    showButton.addEventListener("click", () => {
-        createTaskForm(todoList, projectId);
-    });
+
+    showButton.onclick = () => {
+        console.log("Clicked for project:", projectId);
+        createTaskForm(todoStore, projectId);
+    };
 
     
-    for(let i = 0;i<todoList.length;i++){
-        if(projectId === i.projectId) console.log(todoList[i]);
-    }
+    const taskGrid = document.querySelector(".task-grid");
+    taskGrid.innerHTML = "";
+   
 }

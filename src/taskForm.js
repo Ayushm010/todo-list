@@ -1,63 +1,79 @@
+// createTaskForm.js
+import { addTask } from "./addTask";
 import { createTask } from "./createTask";
-export function createTaskForm(todoList,projectId) {
-    if (document.querySelector(".task-form")) return;
+
+export function createTaskForm(todoList, projectId) {
+    if (document.querySelector(".task-form")) return; // prevent multiple forms
     const todoContainer = document.querySelector(".todo-container");
 
     const form = document.createElement("form");
     form.className = "task-form";
 
+    // Task title input
     const taskTitle = document.createElement("input");
     taskTitle.type = "text";
-    taskTitle.placeholder = "Task Title"
+    taskTitle.placeholder = "Task Title";
 
-    const description = document.createElement("input");
-    description.type = "textarea";
-    description.placeholder = "Description...."
+    // Description textarea
+    const description = document.createElement("textarea");
+    description.placeholder = "Description...";
 
-    const saveButton = document.createElement("button");
-    saveButton.type = "submit";
-    saveButton.textContent = "+Add Task";
-
-    const priority = document.createElement('select');
+    // Priority dropdown
+    const priority = document.createElement("select");
     priority.id = "priorityDropdown";
     const priorityData = ["low", "medium", "high"];
-
-    // Add options 
     priorityData.forEach(level => {
-        const option = document.createElement('option');
-        option.value = level;   // set value attribute
-        option.text = level.charAt(0).toUpperCase() + level.slice(1); // Capitalize first letter
+        const option = document.createElement("option");
+        option.value = level;
+        option.textContent = level.charAt(0).toUpperCase() + level.slice(1);
         priority.appendChild(option);
     });
-    
+
+    // Checkbox for completed
     const checkboxDiv = document.createElement("div");
-    checkboxDiv.classList.add("checkbox")
-    const checkbox = document.createElement('input');
+    checkboxDiv.classList.add("checkbox");
+
+    const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.id = "myCheckbox";
-    checkbox.name = "myCheckbox?"
+    checkbox.name = "myCheckbox";
 
-    const completedLabel = document.createElement('label');
-    completedLabel.htmlFor = "myCheckbox";  // links label to checkbox
-    completedLabel.textContent = "completed?";
-    checkboxDiv.appendChild(completedLabel);
+    const completedLabel = document.createElement("label");
+    completedLabel.htmlFor = "myCheckbox";
+    completedLabel.textContent = "Completed?";
+
     checkboxDiv.appendChild(checkbox);
+    checkboxDiv.appendChild(completedLabel);
 
+    // Submit button
+    const saveButton = document.createElement("button");
+    saveButton.type = "submit";
+    saveButton.textContent = "+ Add Task";
 
+    // Form submit handler
     form.addEventListener("submit", (e) => {
         e.preventDefault();
-        const newTask = createTask(taskTitle.value, description.value, priority.value,checkbox.checked,projectId);
+        const newTask = createTask(
+            taskTitle.value,
+            description.value,
+            priority.value,
+            checkbox.checked,
+            projectId
+        );
         todoList.push(newTask);
-        console.log(todoList);
-        form.remove(); //  remove form after adding
-       
+        addTask(projectId);
+       // console.log(todoList);
+
+        form.remove(); // remove form after adding
     });
 
+    // Append everything to form
     form.appendChild(taskTitle);
     form.appendChild(description);
     form.appendChild(priority);
     form.appendChild(checkboxDiv);
     form.appendChild(saveButton);
-    todoContainer.appendChild(form);
 
+    // Add form to container
+    todoContainer.appendChild(form);
 }

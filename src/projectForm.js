@@ -41,6 +41,7 @@ export function createProjectForm(projectArr) {
     addProject(newProject);// calls the addProject function which adds the newProject to the sidebar
     
     form.remove(); //  remove form after adding
+    
   });
 
   // Handle close

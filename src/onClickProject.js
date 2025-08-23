@@ -4,7 +4,7 @@ export function onClickProject(projectArr,projectId){
     const projectIdx = projectArr.findIndex(project =>project.projectId === projectId);
     const projectName = document.querySelector(".project-name");
     projectName.textContent = projectArr[projectIdx].projectName;
-    console.log(projectArr[projectIdx].projectName);
-
+    console.log(projectArr[projectIdx].projectName +" "+ projectId);
+    
     createTodoList(projectArr,projectId);
  }
