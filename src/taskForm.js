@@ -27,22 +27,7 @@ export function createTaskForm(todoList, projectId) {
         priority.appendChild(option);
     });
 
-    // Checkbox for completed
-    const checkboxDiv = document.createElement("div");
-    checkboxDiv.classList.add("checkbox");
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.id = "myCheckbox";
-    checkbox.name = "myCheckbox";
-
-    const completedLabel = document.createElement("label");
-    completedLabel.htmlFor = "myCheckbox";
-    completedLabel.textContent = "Completed?";
-
-    checkboxDiv.appendChild(checkbox);
-    checkboxDiv.appendChild(completedLabel);
-
+    
     // Submit button
     const saveButton = document.createElement("button");
     saveButton.type = "submit";
@@ -55,7 +40,6 @@ export function createTaskForm(todoList, projectId) {
             taskTitle.value,
             description.value,
             priority.value,
-            checkbox.checked,
             projectId,
             crypto.randomUUID()
         );
@@ -63,6 +47,7 @@ export function createTaskForm(todoList, projectId) {
         addTask(projectId);
        // console.log(todoList);
 
+        cleanup(); // remove listener
         form.remove(); // remove form after adding
     });
 
@@ -70,9 +55,23 @@ export function createTaskForm(todoList, projectId) {
     form.appendChild(taskTitle);
     form.appendChild(description);
     form.appendChild(priority);
-    form.appendChild(checkboxDiv);
+  //  form.appendChild(checkboxDiv);
     form.appendChild(saveButton);
 
     // Add form to container
     todoContainer.appendChild(form);
+
+    // Close form when clicking outside 
+    const handleClickOutside = (e) => {
+        if (!form.contains(e.target) && !todoContainer.contains(e.target)) {
+            cleanup();
+            form.remove();
+        }
+    };
+
+    const cleanup = () => {
+        document.removeEventListener("click", handleClickOutside);
+    };
+
+    document.addEventListener("click", handleClickOutside);
 }

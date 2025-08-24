@@ -11,27 +11,30 @@
     <div class="container">
         <div class="sidebar">
             <div class="sidebar-header">
-                <h1>ToDo-List</h1>
+                <h2 class="site-name"> ToDo-List</h2>
                 <div class="button-box">
-                    <div class="today">
-                        <span class="sidebar-button">Today</span>
+                   
+                    <div class="all-task">
+                        <span class="sidebar-button">All Tasks</span>
                     </div>
-                    <span class="sidebar-button" id="all-task">All Tasks</span>
-                    <span class="sidebar-button" id="completed">Completed</span>
+                    <div class="completed">
+                        <span class="sidebar-button">Completed</span>
+                    </div>
                 </div>
-                <h2>Projects</h2>
             </div>
-            
-            <div class="projects-list">
+            <div class="project-section">
+                <h3>Projects</h3>
+                <div class="projects-list">
+                </div>
             </div>
+
             <button class="add-project-btn">+ Add Project</button>
         </div>
 
         <div class="todo-container">
-            <h1 class="project-name">No project</h1>
-            <div class="task-grid">
-            </div>
+            <h2 class="project-name">No project</h2>
             <button class="add-task">+Add Task</button>
+            <div class="task-grid"></div>
         </div>
     </div>
 </body>

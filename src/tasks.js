@@ -1,12 +1,11 @@
 import { todoStore, projectArr } from "./todoStore";
 
 // function to create a new task object
-export function createTask(title, description, priority, checklist, projectId, taskId) {
+export function createTask(title, description, priority, projectId, taskId) {
   return {
     title: title,
     description: description,
     priority: priority,
-    checklist: checklist,
     projectId: projectId,
     taskId: taskId,
   };
@@ -34,7 +33,14 @@ export function addTask(projectId) {
     removeTaskButton.classList.add("remove-task-button");
     removeTaskButton.textContent = "X";
 
-    headSection.append(taskName, removeTaskButton);
+    
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.id = "myCheckbox";
+    checkbox.name = "myCheckbox";
+
+
+    headSection.append(checkbox,taskName, removeTaskButton);
     task.appendChild(headSection);
     taskGrid.appendChild(task);
 
@@ -62,7 +68,12 @@ export function onClickTask(taskId) {
     removeTaskButton.classList.add("remove-task-button");
     removeTaskButton.textContent = "X";
 
-    headSection.append(taskName, removeTaskButton);
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.id = "Checkbox";
+    checkbox.classList.add = "checkbox";
+
+    headSection.append(checkbox,taskName, removeTaskButton);
     taskDiv.append(headSection);
   } else {
     taskDiv.classList.add("expanded");

@@ -22,8 +22,10 @@ export function createTodoList( projectId) {
       taskGrid.onclick = (event) => {
         const taskDiv = event.target.closest(".task");
         if (!taskDiv) return;
-    
-        if (event.target.classList.contains("remove-task-button")) {
+        if(event.target.classList.contains("checkbox")){
+          
+        }
+        else if (event.target.classList.contains("remove-task-button")) {
           removeTask(projectId,taskDiv.id);
         } else {
           onClickTask(taskDiv.id);
