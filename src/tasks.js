@@ -22,10 +22,10 @@ export function addTask(projectId) {
   for (let i = 0; i < filteredTodoStore.length; i++) {
     const task = document.createElement("div");
     task.classList.add("task");
-    task.id = todoStore[i].taskId;
+    task.id = filteredTodoStore[i].taskId;
 
     const headSection = document.createElement("div");
-      headSection.classList.add("head-section")
+    headSection.classList.add("head-section")
 
     const taskName = document.createElement("p");
     taskName.textContent = filteredTodoStore[i].title;
@@ -37,7 +37,7 @@ export function addTask(projectId) {
     headSection.append(taskName, removeTaskButton);
     task.appendChild(headSection);
     taskGrid.appendChild(task);
-    console.log(filteredTodoStore[i]);
+
   }
 }
 
@@ -45,33 +45,49 @@ export function onClickTask(taskId) {
   const taskIdx = todoStore.findIndex(task => task.taskId === taskId);
   if (taskIdx === -1) return;
 
-  const taskList = document.getElementsByClassName("task");
+  const taskDiv = document.getElementById(taskId);
+  if (!taskDiv) return;
 
-  Array.from(taskList).forEach(task => {
-    if (task.id === todoStore[taskIdx].taskId) {
-      task.innerHTML = "";
-      
-      const headSection = document.createElement("div");
-      headSection.classList.add("head-section")
-      const taskName = document.createElement("p");
-      taskName.textContent = todoStore[taskIdx].title;
+  // Toggle details
+  if (taskDiv.classList.contains("expanded")) {
+    // re-render minimal view
+    taskDiv.classList.remove("expanded");
+    taskDiv.innerHTML = "";
+    const headSection = document.createElement("div");
+    headSection.classList.add("head-section");
+    const taskName = document.createElement("p");
+    taskName.textContent = todoStore[taskIdx].title;
 
-      const removeTaskButton = document.createElement("button");
-      removeTaskButton.classList.add("remove-task-button");
-      removeTaskButton.textContent = "X";
-      
-      const details = document.createElement("div");
+    const removeTaskButton = document.createElement("button");
+    removeTaskButton.classList.add("remove-task-button");
+    removeTaskButton.textContent = "X";
 
-      const description = document.createElement("p");
-      description.textContent = todoStore[taskIdx].description;
+    headSection.append(taskName, removeTaskButton);
+    taskDiv.append(headSection);
+  } else {
+    taskDiv.classList.add("expanded");
+    taskDiv.innerHTML = "";
 
-      headSection.append(taskName, removeTaskButton);
-      details.append(description);
-      task.append(headSection,details);
-      
-    }
-  });
+    const headSection = document.createElement("div");
+    headSection.classList.add("head-section");
+    const taskName = document.createElement("p");
+    taskName.textContent = todoStore[taskIdx].title;
+
+    const removeTaskButton = document.createElement("button");
+    removeTaskButton.classList.add("remove-task-button");
+    removeTaskButton.textContent = "X";
+
+    const details = document.createElement("div");
+    details.classList.add("details")
+    const description = document.createElement("p");
+    description.textContent = todoStore[taskIdx].description;
+
+    headSection.append(taskName, removeTaskButton);
+    details.append(description);
+    taskDiv.append(headSection, details);
+  }
 }
+
 
 export function removeTask(projectId, taskId) {// When remove task button is clicked
   const taskIdx = todoStore.findIndex(task => task.taskId === taskId);

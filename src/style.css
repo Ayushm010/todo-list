@@ -4,36 +4,87 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 
 .container {
     display: grid;
     grid-template-columns: 1fr 4fr;
 }
 
+/* sidebar */
 form {
     display: flex;
     flex-direction: column;
 }
 
 .sidebar {
+    margin: 20px;
     height: 100vh;
     border-right: 1px solid black;
+    background-color: white;
+
 }
-.button-box{
+
+.button-box {
+    margin-left: 10px;
     display: flex;
     flex-direction: column;
     align-items: start;
+    justify-content: stretch;
+    gap: 5px;
 }
+
 .project {
     display: flex;
     gap: 20px;
 }
 
+.projects-list {
+    margin: 5px;
+    padding: 7px;
+    display: grid;
+    gap: 7px;
+}
 
-.head-section{
-    display: flex;
+.project:hover {
+    background-color: rgb(224, 219, 219);
+    color: violet;
+    font-size: 1.01em;
+    margin: 2px;
+    padding: 3px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+
+
+.sidebar-button:hover {
+    background-color: rgb(224, 219, 219);
+    font-size: 1.01em;
+    margin: 2px;
+    padding: 3px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.head-section {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
     gap: 20px;
 }
+
+.remove-task-button {
+    justify-self: end;
+}
+
+/* Todo container */
+.todo-container {
+    background-color: white;
+    margin: 20px;
+}
+
 .task-form {
     height: 400px;
     width: 400px;
@@ -54,9 +105,49 @@ form {
     z-index: 1000;
 }
 
+.task-grid {
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
 
-.remove-project-button,.remove-task-button,.sidebar-button{
-  background-color: transparent;
-  border: none; 
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.task {
+    border-bottom: 1px solid #f0f0f0;
+    ;
+    border-radius: 5px;
+
+    padding: 5px;
+}
+
+.details:active {
+    font-size: 0.8em;
+    transition-duration: 0.9s;
+}
+
+.remove-project-button,
+.remove-task-button,
+.sidebar-button,
+.add-task {
+    background-color: transparent;
+    border: none;
+}
+
+.add-project-btn {
+    background-color: #6d0a6d;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    /* transition-duration: 0.2s; */
 
 }
