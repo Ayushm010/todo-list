@@ -10,32 +10,32 @@ export function createTodoList(projectId) {
   const openForm = document.querySelector(".task-form");
   if (openForm) openForm.remove();
 
-  const showButton = document.querySelector(".add-task");
+  const addTaskButton = document.querySelector(".add-task");
 
-  showButton.onclick = () => {
+  addTaskButton.onclick = () => {
     console.log("Clicked for project:", projectId);
     createTaskForm(todoStore, projectId);
   };
-
   addTask(projectId);
+
   const taskGrid = document.querySelector(".task-grid");
-taskGrid.onclick = (event) => {
-  const taskDiv = event.target.closest(".task");
-  if (!taskDiv) return;
+  taskGrid.onclick = (event) => {
+    const taskDiv = event.target.closest(".task");
+    if (!taskDiv) return;
 
-  if (event.target.classList.contains("remove-task-button")) {
-    removeTask(projectId, taskDiv.id);
-    return;
-  }
+    if (event.target.classList.contains("remove-task-button")) {
+      removeTask(projectId, taskDiv.id);
+      return;
+    }
 
-  if (event.target.classList.contains("checkbox")) {
-    event.stopPropagation();
-    onClickCheckbox(taskDiv, taskDiv.id);
-    return;
-  }
+    if (event.target.classList.contains("checkbox")) {
+      event.stopPropagation();
+      onClickCheckbox(taskDiv, taskDiv.id);
+      return;
+    }
 
-  onClickTask(taskDiv.id);
-};
+    onClickTask(taskDiv.id);
+  };
 
 
 }

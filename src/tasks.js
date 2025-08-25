@@ -16,8 +16,14 @@ export function createTask(title, description, priority, projectId, taskId) {
 export function addTask(projectId) {
   const taskGrid = document.querySelector(".task-grid");
   taskGrid.innerHTML = "";
-
-  const filteredTodoStore = todoStore.filter(todo => todo.projectId === projectId);
+  let filteredTodoStore;
+  if(projectId !== "all-task-list"){
+    console.log("hii i am normal project");
+    filteredTodoStore = todoStore.filter(todo => todo.projectId === projectId);
+  }else{
+    console.log("hii i am alltask");
+    filteredTodoStore = todoStore;
+  }
 
   for (let i = 0; i < filteredTodoStore.length; i++) {
     const task = document.createElement("div");
@@ -43,7 +49,6 @@ export function addTask(projectId) {
     headSection.append(checkbox, taskName, removeTaskButton);
     task.appendChild(headSection);
     taskGrid.appendChild(task);
-
   }
 }
 export function onClickCheckbox(taskDiv, taskId) {
@@ -139,3 +144,4 @@ export function removeTask(projectId, taskId) {// When remove task button is cli
   }
   addTask(projectId);
 }
+
