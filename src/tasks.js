@@ -8,6 +8,7 @@ export function createTask(title, description, priority, projectId, taskId) {
     priority: priority,
     projectId: projectId,
     taskId: taskId,
+    completed: false
   };
 }
 
@@ -33,19 +34,35 @@ export function addTask(projectId) {
     removeTaskButton.classList.add("remove-task-button");
     removeTaskButton.textContent = "X";
 
-    
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.id = "myCheckbox";
-    checkbox.name = "myCheckbox";
+    checkbox.name = "Checkbox";
+    checkbox.classList.add("checkbox");
+    checkbox.checked = filteredTodoStore[i].completed;
 
-
-    headSection.append(checkbox,taskName, removeTaskButton);
+    headSection.append(checkbox, taskName, removeTaskButton);
     task.appendChild(headSection);
     taskGrid.appendChild(task);
 
   }
 }
+export function onClickCheckbox(taskDiv, taskId) {
+  const taskIdx = todoStore.findIndex(task => task.taskId === taskId);
+  if (taskIdx === -1) return;
+
+  const checkbox = taskDiv.querySelector(".checkbox");
+  const textPara = taskDiv.querySelector("p");
+
+  todoStore[taskIdx].completed = checkbox.checked;// when the checkbox is checked it will update the property
+
+  if (checkbox.checked) {
+    textPara.innerHTML = `<del>${todoStore[taskIdx].title}</del>`;
+  } else {
+    textPara.textContent = todoStore[taskIdx].title;
+  }
+}
+
+
 
 export function onClickTask(taskId) {
   const taskIdx = todoStore.findIndex(task => task.taskId === taskId);
@@ -70,10 +87,15 @@ export function onClickTask(taskId) {
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.id = "Checkbox";
-    checkbox.classList.add = "checkbox";
+    checkbox.classList.add("checkbox");
+    checkbox.name = "Checkbox";
+    checkbox.checked = todoStore[taskIdx].completed;
 
-    headSection.append(checkbox,taskName, removeTaskButton);
+    if (todoStore[taskIdx].completed === true) {// if the checkbox is ticked
+       taskName.innerHTML = `<del>${todoStore[taskIdx].title}</del>`;
+    }
+
+    headSection.append(checkbox, taskName, removeTaskButton);
     taskDiv.append(headSection);
   } else {
     taskDiv.classList.add("expanded");
@@ -88,12 +110,22 @@ export function onClickTask(taskId) {
     removeTaskButton.classList.add("remove-task-button");
     removeTaskButton.textContent = "X";
 
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.name = "Checkbox";
+    checkbox.classList.add("checkbox");
+
+    checkbox.checked = todoStore[taskIdx].completed;
+    if (todoStore[taskIdx].completed === true) {
+      taskName.innerHTML = `<del>${todoStore[taskIdx].title}</del>`;
+    }
+
     const details = document.createElement("div");
     details.classList.add("details")
     const description = document.createElement("p");
     description.textContent = todoStore[taskIdx].description;
 
-    headSection.append(taskName, removeTaskButton);
+    headSection.append(checkbox, taskName, removeTaskButton);
     details.append(description);
     taskDiv.append(headSection, details);
   }
