@@ -12,7 +12,62 @@ export function createTask(title, description, priority, projectId, taskId) {
   };
 }
 
-// function to add tasks into the DOM grid
+//  create task head section 
+function createTaskHead(taskObj) {
+  const headSection = document.createElement("div");
+  headSection.classList.add("head-section");
+
+  const taskName = document.createElement("p");
+  taskName.textContent = taskObj.title;
+
+  const removeTaskButton = document.createElement("button");
+  removeTaskButton.classList.add("remove-task-button");
+  removeTaskButton.textContent = "X";
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.name = "Checkbox";
+  checkbox.classList.add("checkbox");
+  checkbox.checked = taskObj.completed;
+
+  if (taskObj.completed === true) { // if the checkbox is ticked
+    taskName.innerHTML = `<del>${taskObj.title}</del>`;
+  }
+
+  headSection.append(checkbox, taskName, removeTaskButton);
+  return headSection;
+}
+
+// create task details
+function createTaskDetails(taskObj) {
+  
+  const details = document.createElement("div");
+  details.classList.add("details");
+  const taskDetails = document.createElement("div");
+  taskDetails.classList.add("task-details");
+
+  const description = document.createElement("p");
+  description.textContent = taskObj.description;
+  
+  const priority = document.createElement("p")
+  priority.textContent = `Priority: ${taskObj.priority}`;
+  
+  const editButtonContainer = document.createElement("div");
+  editButtonContainer.classList.add("edit-button-container");
+
+  const editButton = document.createElement("button");
+  editButton.classList.add("edit-button");
+  editButton.textContent = "edit";
+  editButton.addEventListener("click",editForm);
+  
+
+  taskDetails.append(description,priority);
+  editButtonContainer.append(editButton);
+  details.append(taskDetails,editButtonContainer);
+  return details;
+}
+
+// function to add tasks into the DOM 
 export function addTask(projectId) {
   const taskGrid = document.querySelector(".task-grid");
   taskGrid.innerHTML = "";
@@ -35,28 +90,9 @@ export function addTask(projectId) {
     task.classList.add("task");
     task.id = filteredTodoStore[i].taskId;
 
-    const headSection = document.createElement("div");
-    headSection.classList.add("head-section");
-
-    const taskName = document.createElement("p");
-    taskName.textContent = filteredTodoStore[i].title;
-
-    const removeTaskButton = document.createElement("button");
-    removeTaskButton.classList.add("remove-task-button");
-    removeTaskButton.textContent = "X";
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.name = "Checkbox";
-    checkbox.classList.add("checkbox");
-    checkbox.checked = filteredTodoStore[i].completed;
-
-    if (filteredTodoStore[i].completed === true) { // if the checkbox is ticked
-      taskName.innerHTML = `<del>${filteredTodoStore[i].title}</del>`;
-    }
-
-    headSection.append(checkbox, taskName, removeTaskButton);
+    const headSection = createTaskHead(filteredTodoStore[i]);
     task.appendChild(headSection);
+
     taskGrid.appendChild(task);
   }
 }
@@ -86,61 +122,19 @@ export function onClickTask(taskId) {
 
   // Toggle details
   if (taskDiv.classList.contains("expanded")) {
-    // re-render minimal view
+    // re-render 
     taskDiv.classList.remove("expanded");
     taskDiv.innerHTML = "";
 
-    const headSection = document.createElement("div");
-    headSection.classList.add("head-section");
-    const taskName = document.createElement("p");
-    taskName.textContent = todoStore[taskIdx].title;
-
-    const removeTaskButton = document.createElement("button");
-    removeTaskButton.classList.add("remove-task-button");
-    removeTaskButton.textContent = "X";
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.classList.add("checkbox");
-    checkbox.name = "Checkbox";
-    checkbox.checked = todoStore[taskIdx].completed;
-
-    if (todoStore[taskIdx].completed === true) { // if the checkbox is ticked
-      taskName.innerHTML = `<del>${todoStore[taskIdx].title}</del>`;
-    }
-
-    headSection.append(checkbox, taskName, removeTaskButton);
+    const headSection = createTaskHead(todoStore[taskIdx]);
     taskDiv.append(headSection);
   } else {
     taskDiv.classList.add("expanded");
     taskDiv.innerHTML = "";
 
-    const headSection = document.createElement("div");
-    headSection.classList.add("head-section");
-    const taskName = document.createElement("p");
-    taskName.textContent = todoStore[taskIdx].title;
+    const headSection = createTaskHead(todoStore[taskIdx]);
+    const details = createTaskDetails(todoStore[taskIdx]);
 
-    const removeTaskButton = document.createElement("button");
-    removeTaskButton.classList.add("remove-task-button");
-    removeTaskButton.textContent = "X";
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.name = "Checkbox";
-    checkbox.classList.add("checkbox");
-    checkbox.checked = todoStore[taskIdx].completed;
-
-    if (todoStore[taskIdx].completed === true) {
-      taskName.innerHTML = `<del>${todoStore[taskIdx].title}</del>`;
-    }
-
-    const details = document.createElement("div");
-    details.classList.add("details");
-    const description = document.createElement("p");
-    description.textContent = todoStore[taskIdx].description;
-
-    headSection.append(checkbox, taskName, removeTaskButton);
-    details.append(description);
     taskDiv.append(headSection, details);
   }
 }
@@ -151,4 +145,10 @@ export function removeTask(projectId, taskId) { // When remove task button is cl
     todoStore.splice(taskIdx, 1);
   }
   addTask(projectId);
+}
+
+function editForm(){
+  console.log("yaay, here we go edit form!!!!!!!!");
+  // this will re-render the for with pre filled tasks
+  
 }

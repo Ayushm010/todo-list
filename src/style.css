@@ -143,7 +143,7 @@ form {
 }
 
 .task {
-    border-bottom: 1px solid #f0f0f0;
+    border: 1px solid #f0f0f0;
     border-radius: 5px;
     padding: 5px;
 }
@@ -159,24 +159,38 @@ form {
 .head-section p{
     justify-self: start;
     align-self: start;
+    
 }
 
-.details:active {
-    font-size: 0.8em;
-    transition-duration: 0.9s;
+.details{
+    display: grid;
+    grid-template-columns: 5fr 1fr;
 }
+.details .edit-button-container{
+    justify-self: end;
+}
+.task-details {
+    padding-top: 4px;
+    padding-left: 17%;
+    margin-left: 20px;
+    font-size: 0.8em;
+}
+
 
 /* All buttons with transparent background */
 .remove-project-button,
 .remove-task-button,
-.add-task {
+.add-task ,
+.edit-button{
     background-color: transparent;
     border: none;
+    color: gray;
 }
 
 .add-task:hover,
 .remove-project-button:hover,
-.remove-task-button:hover {
+.remove-task-button:hover,
+.edit-button:hover {
     color: red;
 }
 
@@ -203,4 +217,9 @@ form {
     border: 1px solid gray;
     border-radius: 5px;
     cursor: pointer;
+}
+
+/* Edit button Container */
+.edit-button-container{
+   
 }
