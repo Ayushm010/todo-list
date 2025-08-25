@@ -44,7 +44,7 @@ export function createTaskForm(todoList, projectId) {
             crypto.randomUUID()
         );
         todoList.push(newTask);
-        addTask(projectId);
+       if(projectId !== "all-task-list" && projectId !== "completed-task-list")  addTask(projectId);
        // console.log(todoList);
 
         cleanup(); // remove listener

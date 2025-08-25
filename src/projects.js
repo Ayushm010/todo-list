@@ -1,12 +1,12 @@
 import { createTodoList } from "./todoList";
-import { projectArr } from "./todoStore";  // 
+import { projectArr, todoStore } from "./todoStore";  // 
 import { createProjectForm } from "./projectForm";
 // function to create project object
 export function createProject() {
   return {
     projectName: "",
     taskIds: [],
-    projectId: crypto.randomUUID(), 
+    projectId: crypto.randomUUID(),
   };
 }
 
@@ -21,23 +21,23 @@ export function addProject(newProject) {
   const projectName = document.createElement("p");
   projectName.textContent = newProject.projectName;
 
- const removeProjectButton = document.createElement("button");
- removeProjectButton.classList.add("remove-project-button");
- removeProjectButton.textContent = "X";
+  const removeProjectButton = document.createElement("button");
+  removeProjectButton.classList.add("remove-project-button");
+  removeProjectButton.textContent = "X";
 
 
-  project.append(projectName,removeProjectButton);
+  project.append(projectName, removeProjectButton);
   projectContainer.appendChild(project);
 }
 
 // when project is clicked from sidebar
-export function onClickProject(projectArr, projectId){
+export function onClickProject(projectArr, projectId) {
   const projectIdx = projectArr.findIndex(project => project.projectId === projectId);
   if (projectIdx === -1) return;
 
   const projectName = document.querySelector(".project-name");
   projectName.textContent = projectArr[projectIdx].projectName;
-  
+
   createTodoList(projectId); // Create todo
 }
 
@@ -47,6 +47,12 @@ export function removeProject(projectId) {
   const projectIdx = projectArr.findIndex(p => p.projectId === projectId);
   if (projectIdx !== -1) {
     projectArr.splice(projectIdx, 1);
+    for (let i = todoStore.length - 1; i >= 0; i--) {
+      if (todoStore[i].projectId === projectId) {
+        todoStore.splice(i, 1);
+      }
+    }
+
   }
 
   // Remove from sidebar

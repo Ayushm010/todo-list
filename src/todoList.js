@@ -12,6 +12,12 @@ export function createTodoList(projectId) {
 
   const addTaskButton = document.querySelector(".add-task");
 
+  if (projectId !== "all-task-list" && projectId !== "completed-task-list") {
+    addTaskButton.textContent = "+Add Task"
+  } else {//hides the addtask button when we click all project button
+    addTaskButton.textContent = "";
+  }
+
   addTaskButton.onclick = () => {
     console.log("Clicked for project:", projectId);
     createTaskForm(todoStore, projectId);
@@ -36,6 +42,4 @@ export function createTodoList(projectId) {
 
     onClickTask(taskDiv.id);
   };
-
-
 }

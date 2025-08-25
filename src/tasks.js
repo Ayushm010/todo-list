@@ -17,12 +17,17 @@ export function addTask(projectId) {
   const taskGrid = document.querySelector(".task-grid");
   taskGrid.innerHTML = "";
   let filteredTodoStore;
-  if(projectId !== "all-task-list"){
-    console.log("hii i am normal project");
-    filteredTodoStore = todoStore.filter(todo => todo.projectId === projectId);
-  }else{
+
+  if (projectId === "completed-task-list") {
+    // show only completed tasks
+    filteredTodoStore = todoStore.filter(todo => todo.completed === true);
+  }
+  else if (projectId === "all-task-list") {
     console.log("hii i am alltask");
     filteredTodoStore = todoStore;
+  } else {
+    console.log("hii i am normal project");
+    filteredTodoStore = todoStore.filter(todo => todo.projectId === projectId);
   }
 
   for (let i = 0; i < filteredTodoStore.length; i++) {
@@ -31,7 +36,7 @@ export function addTask(projectId) {
     task.id = filteredTodoStore[i].taskId;
 
     const headSection = document.createElement("div");
-    headSection.classList.add("head-section")
+    headSection.classList.add("head-section");
 
     const taskName = document.createElement("p");
     taskName.textContent = filteredTodoStore[i].title;
@@ -46,11 +51,16 @@ export function addTask(projectId) {
     checkbox.classList.add("checkbox");
     checkbox.checked = filteredTodoStore[i].completed;
 
+    if (filteredTodoStore[i].completed === true) { // if the checkbox is ticked
+      taskName.innerHTML = `<del>${filteredTodoStore[i].title}</del>`;
+    }
+
     headSection.append(checkbox, taskName, removeTaskButton);
     task.appendChild(headSection);
     taskGrid.appendChild(task);
   }
 }
+
 export function onClickCheckbox(taskDiv, taskId) {
   const taskIdx = todoStore.findIndex(task => task.taskId === taskId);
   if (taskIdx === -1) return;
@@ -58,7 +68,7 @@ export function onClickCheckbox(taskDiv, taskId) {
   const checkbox = taskDiv.querySelector(".checkbox");
   const textPara = taskDiv.querySelector("p");
 
-  todoStore[taskIdx].completed = checkbox.checked;// when the checkbox is checked it will update the property
+  todoStore[taskIdx].completed = checkbox.checked; // when the checkbox is checked it will update the property
 
   if (checkbox.checked) {
     textPara.innerHTML = `<del>${todoStore[taskIdx].title}</del>`;
@@ -66,8 +76,6 @@ export function onClickCheckbox(taskDiv, taskId) {
     textPara.textContent = todoStore[taskIdx].title;
   }
 }
-
-
 
 export function onClickTask(taskId) {
   const taskIdx = todoStore.findIndex(task => task.taskId === taskId);
@@ -81,6 +89,7 @@ export function onClickTask(taskId) {
     // re-render minimal view
     taskDiv.classList.remove("expanded");
     taskDiv.innerHTML = "";
+
     const headSection = document.createElement("div");
     headSection.classList.add("head-section");
     const taskName = document.createElement("p");
@@ -96,8 +105,8 @@ export function onClickTask(taskId) {
     checkbox.name = "Checkbox";
     checkbox.checked = todoStore[taskIdx].completed;
 
-    if (todoStore[taskIdx].completed === true) {// if the checkbox is ticked
-       taskName.innerHTML = `<del>${todoStore[taskIdx].title}</del>`;
+    if (todoStore[taskIdx].completed === true) { // if the checkbox is ticked
+      taskName.innerHTML = `<del>${todoStore[taskIdx].title}</del>`;
     }
 
     headSection.append(checkbox, taskName, removeTaskButton);
@@ -119,14 +128,14 @@ export function onClickTask(taskId) {
     checkbox.type = "checkbox";
     checkbox.name = "Checkbox";
     checkbox.classList.add("checkbox");
-
     checkbox.checked = todoStore[taskIdx].completed;
+
     if (todoStore[taskIdx].completed === true) {
       taskName.innerHTML = `<del>${todoStore[taskIdx].title}</del>`;
     }
 
     const details = document.createElement("div");
-    details.classList.add("details")
+    details.classList.add("details");
     const description = document.createElement("p");
     description.textContent = todoStore[taskIdx].description;
 
@@ -136,12 +145,10 @@ export function onClickTask(taskId) {
   }
 }
 
-
-export function removeTask(projectId, taskId) {// When remove task button is clicked
+export function removeTask(projectId, taskId) { // When remove task button is clicked
   const taskIdx = todoStore.findIndex(task => task.taskId === taskId);
   if (taskIdx !== -1) {
     todoStore.splice(taskIdx, 1);
   }
   addTask(projectId);
 }
-
