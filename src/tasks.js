@@ -58,7 +58,7 @@ function createTaskDetails(taskObj) {
   const editButton = document.createElement("button");
   editButton.classList.add("edit-button");
   editButton.textContent = "edit";
-  editButton.addEventListener("click",editForm);
+ // editButton.addEventListener("click",editForm(taskObj.pro));
   
 
   taskDetails.append(description,priority);
@@ -147,8 +147,101 @@ export function removeTask(projectId, taskId) { // When remove task button is cl
   addTask(projectId);
 }
 
-function editForm(){
-  console.log("yaay, here we go edit form!!!!!!!!");
-  // this will re-render the for with pre filled tasks
-  
+export function onClickEdit(taskId){
+    const taskIdx = todoStore.findIndex(task => task.taskId === taskId);
+    const projectId = todoStore[taskIdx].projectId;
+  if (document.querySelector(".task-form")) return; // prevent multiple forms
+    const todoContainer = document.querySelector(".todo-container");
+
+    const heading = document.createElement("h2");
+    heading.textContent = "New Task";
+    heading.className = "task-form-heading";
+   
+
+    const form = document.createElement("form");
+    form.className = "task-form";
+
+    // Task title input
+    const taskTitle = document.createElement("input");
+    taskTitle.type = "text";
+    taskTitle.placeholder = "Task Title";
+    taskTitle.className = "task-title-input";
+    taskTitle.value = todoStore[taskIdx].title;
+
+    // Description textarea
+    const description = document.createElement("textarea");
+    description.placeholder = "Description...";
+    description.className = "task-desc-textarea";
+    description.value =  todoStore[taskIdx].description;
+
+    const priorityDiv = document.createElement("div");
+    priorityDiv.className = "priority-wrapper";
+
+    const priorityLabel = document.createElement("label");
+    priorityLabel.htmlFor = "priorityDropdown";
+    priorityLabel.textContent = "Priority:";
+    priorityLabel.className = "priority-label";
+
+    // Priority dropdown
+    const priority = document.createElement("select");
+    priority.id = "priorityDropdown";   
+     priority.className = "priority-dropdown";
+
+    const priorityData = ["low", "medium", "high"];
+    priorityData.forEach(level => {
+        const option = document.createElement("option");
+        option.value = level;
+        option.textContent = level.charAt(0).toUpperCase() + level.slice(1);
+        priority.appendChild(option);
+    });
+    priority.value = todoStore[taskIdx].priority;
+
+     priorityDiv.appendChild(priorityLabel);
+    priorityDiv.appendChild(priority);
+    
+    // Submit button
+    const saveButton = document.createElement("button");
+    saveButton.type = "submit";
+    saveButton.textContent = "+ Edit Task";
+     saveButton.className = "task-submit-btn";
+
+    // Form submit handler
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+           if( todoStore[taskIdx].title === ""){
+            
+           }
+            todoStore[taskIdx].title= taskTitle.value;
+             todoStore[taskIdx].description= description.value;
+             todoStore[taskIdx].priority= priority.value;
+          
+       if(projectId !== "all-task-list" && projectId !== "completed-task-list")  addTask(projectId);
+       // console.log(todoList);
+
+        cleanup(); // remove listener
+        form.remove(); // remove form after adding
+    });
+
+    // Append everything to form
+      form.appendChild(heading);
+    form.appendChild(taskTitle);
+    form.appendChild(description);
+    form.appendChild(priorityDiv);
+    form.appendChild(saveButton);
+    // Add form to container
+    todoContainer.appendChild(form);
+
+    // Close form when clicking outside 
+    const handleClickOutside = (e) => {
+        if (!form.contains(e.target) && !todoContainer.contains(e.target)) {
+            cleanup();
+            form.remove();
+        }
+    };
+
+    const cleanup = () => {
+        document.removeEventListener("click", handleClickOutside);
+    };
+
+    document.addEventListener("click", handleClickOutside);
 }

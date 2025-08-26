@@ -9,21 +9,27 @@ export function createProjectForm(projectArr) {
   const form = document.createElement("form");
   form.classList.add("project-form");
 
+  // Heading
+  const heading = document.createElement("h2");
+  heading.textContent = "New Project";
+  heading.className = "project-form-heading";
+
   const inputElement = document.createElement("input");
   inputElement.type = "text";
   inputElement.placeholder = "Project name";
+  inputElement.className = "input-element"
 
   const addButton = document.createElement("button");
   addButton.type = "submit";
   addButton.textContent = "Add";
+  addButton.className = "project-submit-btn";
 
   const closeButton = document.createElement("button");
   closeButton.type = "button";
   closeButton.textContent = "Close";
+  closeButton.className = "close-btn";
 
-  form.appendChild(inputElement);
-  form.appendChild(addButton);
-  form.appendChild(closeButton);
+  form.append(heading, inputElement, addButton, closeButton);
   sidebar.appendChild(form); // appends to the sidebar
 
   // Handle form submit
@@ -38,9 +44,9 @@ export function createProjectForm(projectArr) {
     projectArr.push(newProject);
 
     addProject(newProject);// calls the addProject function which adds the newProject to the sidebar
-    
+
     form.remove(); //  remove form after adding
-    
+
   });
 
   // Handle close

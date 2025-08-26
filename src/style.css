@@ -54,9 +54,9 @@ form {
     cursor: pointer;
 }
 
-/* Project button div */
+/* Project form */
 .project-form {
-    height: 150px;
+    height: auto;
     width: 250px;
     display: flex;
     align-items: center;
@@ -74,6 +74,25 @@ form {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     z-index: 1000;
 }
+.input-element{
+     width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+.project-submit-btn,.close-btn{
+    width: 100%;
+  background: purple;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
 .project {
     display: grid;
     grid-template-columns: 3fr 1fr;
@@ -113,24 +132,86 @@ form {
 
 /* task form */
 .task-form {
-    height: 400px;
-    width: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+  height: auto;               
+  width: 400px;
+  display: flex;
+  flex-direction: column;     
+  gap: 15px;
 
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    border: none;
-    border-radius: 10px;
-    background: white;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 25px;
+  border: none;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
 }
+
+/* Heading */
+.heading-wrapper{
+    display: flex;
+}
+
+.task-form-heading{
+    flex-grow: 3;
+}
+
+.task-form-heading,.project-form-heading {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+/* Inputs & textarea */
+.task-title-input,
+.task-desc-textarea,
+.priority-dropdown {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.90rem;
+}
+
+.task-desc-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Priority wrapper */
+.priority-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.priority-label {
+  font-size: 0.9rem;
+  color: #555;
+  margin-right: 10px;
+}
+
+/* Button */
+.task-submit-btn {
+  background: purple;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.task-submit-btn:hover,.project-submit-btn:hover,.close-btn:hover {
+  background: crimson; 
+}
+
 
 .task-grid {
     background-color: white;
@@ -181,7 +262,8 @@ form {
 .remove-project-button,
 .remove-task-button,
 .add-task ,
-.edit-button{
+.edit-button,
+.close-task-btn{
     background-color: transparent;
     border: none;
     color: gray;
@@ -190,7 +272,8 @@ form {
 .add-task:hover,
 .remove-project-button:hover,
 .remove-task-button:hover,
-.edit-button:hover {
+.edit-button:hover ,
+.close-task-btn:hover{
     color: red;
 }
 
@@ -217,9 +300,4 @@ form {
     border: 1px solid gray;
     border-radius: 5px;
     cursor: pointer;
-}
-
-/* Edit button Container */
-.edit-button-container{
-   
 }

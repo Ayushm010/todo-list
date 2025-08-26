@@ -4,6 +4,7 @@ import { todoStore, projectArr } from "./todoStore";
 import { onClickTask } from "./tasks";
 import { removeTask } from "./tasks";
 import { onClickCheckbox } from "./tasks";
+import { onClickEdit } from "./tasks";
 
 export function createTodoList(projectId) {
 
@@ -39,7 +40,12 @@ export function createTodoList(projectId) {
       onClickCheckbox(taskDiv, taskDiv.id);
       return;
     }
-
+    
+    if(event.target.classList.contains("edit-button")){
+      onClickEdit(taskDiv.id);
+      console.log("hii");
+      return;
+    }
     onClickTask(taskDiv.id);
   };
 }
