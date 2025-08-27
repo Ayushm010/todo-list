@@ -47,6 +47,8 @@ export function removeProject(projectId) {
   const projectIdx = projectArr.findIndex(p => p.projectId === projectId);
   if (projectIdx !== -1) {
     projectArr.splice(projectIdx, 1);
+    localStorage.setItem("todoStore", JSON.stringify(todoStore)); // save tasks
+
     for (let i = todoStore.length - 1; i >= 0; i--) {
       if (todoStore[i].projectId === projectId) {
         todoStore.splice(i, 1);

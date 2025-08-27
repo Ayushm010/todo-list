@@ -42,6 +42,7 @@ export function createProjectForm(projectArr) {
     newProject.projectName = inputElement.value.trim();// trims all the white spaces
 
     projectArr.push(newProject);
+    localStorage.setItem("projectArr", JSON.stringify(projectArr)); // save projects
 
     addProject(newProject);// calls the addProject function which adds the newProject to the sidebar
 

@@ -64,8 +64,8 @@ function createTaskDetails(taskObj) {
   editButton.textContent = "edit";
 
   const dueDate = document.createElement("p");
-  const date =  taskObj.dueDate.split("-");
-  dueDate.textContent = `DueDate: ${date[2]+"-"+ date[1]+"-"+date[0]}`;
+  const date = taskObj.dueDate.split("-");
+  dueDate.textContent = `DueDate: ${date[2] + "-" + date[1] + "-" + date[0]}`;
 
 
   taskDetails.append(description, priority, dueDate);
@@ -112,6 +112,7 @@ export function onClickCheckbox(taskDiv, taskId) {
   const textPara = taskDiv.querySelector("p");
 
   todoStore[taskIdx].completed = checkbox.checked; // when the checkbox is checked it will update the property
+  localStorage.setItem("todoStore", JSON.stringify(todoStore)); // save tasks
 
   if (checkbox.checked) {
     textPara.innerHTML = `<del>${todoStore[taskIdx].title}</del>`;
@@ -150,6 +151,8 @@ export function removeTask(projectId, taskId) { // When remove task button is cl
   const taskIdx = todoStore.findIndex(task => task.taskId === taskId);
   if (taskIdx !== -1) {
     todoStore.splice(taskIdx, 1);
+    localStorage.setItem("todoStore", JSON.stringify(todoStore)); // save tasks
+
   }
   addTask(projectId);
 }
@@ -228,7 +231,7 @@ export function onClickEdit(taskId) {
   dateInput.name = "dueDate";
   dateInput.value = formattedDate;
 
-  dateInputWrapper.append(dateInputLabel,dateInput);
+  dateInputWrapper.append(dateInputLabel, dateInput);
 
   // Submit button
   const saveButton = document.createElement("button");
@@ -246,11 +249,13 @@ export function onClickEdit(taskId) {
   // Form submit handler
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-   
+
     todoStore[taskIdx].title = taskTitle.value;
     todoStore[taskIdx].description = description.value;
     todoStore[taskIdx].priority = priority.value;
-    todoStore[taskIdx].dueDate = dueDate.value;
+    todoStore[taskIdx].dueDate = dateInput.value;
+    localStorage.setItem("todoStore", JSON.stringify(todoStore)); // save tasks
+
 
     if (projectId !== "all-task-list" && projectId !== "completed-task-list") addTask(projectId);
     // console.log(todoList);

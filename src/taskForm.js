@@ -74,7 +74,7 @@ export function createTaskForm(todoList, projectId) {
     dateInput.className = "due-date";
     dateInput.name = "due-date";
     dateInput.value = formattedDate;
-    dateInputWrapper.append(dateInputLabel,dateInput);
+    dateInputWrapper.append(dateInputLabel, dateInput);
 
     // Submit button
     const saveButton = document.createElement("button");
@@ -101,6 +101,8 @@ export function createTaskForm(todoList, projectId) {
             crypto.randomUUID()
         );
         todoList.push(newTask);
+        localStorage.setItem("todoStore", JSON.stringify(todoList)); // save tasks
+
         if (projectId !== "all-task-list" && projectId !== "completed-task-list")
             addTask(projectId);
 

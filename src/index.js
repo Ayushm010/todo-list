@@ -1,7 +1,19 @@
 import "./style.css";
 import { allProjects } from "./projects";
-import { todoStore } from "./todoStore";
+import { todoStore, projectArr } from "./todoStore";
 import { createTodoList } from "./todoList";
+
+// restore projectArr
+if (localStorage.getItem("projectArr")) {
+  projectArr.length = 0;
+  projectArr.push(...JSON.parse(localStorage.getItem("projectArr")));
+}
+
+// restore todoStore
+if (localStorage.getItem("todoStore")) {
+  todoStore.length = 0;
+  todoStore.push(...JSON.parse(localStorage.getItem("todoStore")));
+}
 
 allProjects();
 
