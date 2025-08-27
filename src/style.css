@@ -170,7 +170,8 @@ form {
 /* Inputs & textarea */
 .task-title-input,
 .task-desc-textarea,
-.priority-dropdown {
+.priority-dropdown,
+.due-date {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -190,7 +191,7 @@ form {
   justify-content: space-between;
 }
 
-.priority-label {
+.priority-label,.duedate-label {
   font-size: 0.9rem;
   color: #555;
   margin-right: 10px;

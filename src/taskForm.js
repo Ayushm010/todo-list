@@ -1,5 +1,6 @@
 // createTaskForm.js
 import { addTask, createTask } from "./tasks";
+import { format } from 'date-fns';
 
 export function createTaskForm(todoList, projectId) {
     if (document.querySelector(".task-form")) return; // prevent multiple forms
@@ -11,6 +12,7 @@ export function createTaskForm(todoList, projectId) {
     // Heading
     const headingWrapper = document.createElement("div");
     headingWrapper.className = "heading-wrapper";
+
     const heading = document.createElement("h2");
     heading.textContent = "New Task";
     heading.className = "task-form-heading";
@@ -53,6 +55,27 @@ export function createTaskForm(todoList, projectId) {
     priorityDiv.appendChild(priorityLabel);
     priorityDiv.appendChild(priority);
 
+    // Due Date
+
+    const dateInputWrapper = document.createElement("div");
+    dateInputWrapper.className = "duedate-wrapper";
+
+    const dateInputLabel = document.createElement("label");
+    dateInputLabel.htmlFor = "duedate-label";
+    dateInputLabel.textContent = "Due Date: ";
+    dateInputLabel.className = "duedate-label";
+
+    const today = new Date();
+    const formattedDate = format(today, "yyyy-MM-dd");
+
+    const dateInput = document.createElement("input");
+    dateInput.type = "date";
+    dateInput.id = "dueDate";
+    dateInput.className = "due-date";
+    dateInput.name = "due-date";
+    dateInput.value = formattedDate;
+    dateInputWrapper.append(dateInputLabel,dateInput);
+
     // Submit button
     const saveButton = document.createElement("button");
     saveButton.type = "submit";
@@ -64,7 +87,7 @@ export function createTaskForm(todoList, projectId) {
     closeTaskButton.textContent = "X";
     closeTaskButton.className = "close-task-btn";
 
-    headingWrapper.append(heading,closeTaskButton)
+    headingWrapper.append(heading, closeTaskButton)
 
     // Form submit handler
     form.addEventListener("submit", (e) => {
@@ -73,6 +96,7 @@ export function createTaskForm(todoList, projectId) {
             taskTitle.value,
             description.value,
             priority.value,
+            dateInput.value,
             projectId,
             crypto.randomUUID()
         );
@@ -85,11 +109,7 @@ export function createTaskForm(todoList, projectId) {
     });
 
     // Append everything to form
-    form.appendChild(headingWrapper);
-    form.appendChild(taskTitle);
-    form.appendChild(description);
-    form.appendChild(priorityDiv);
-    form.appendChild(saveButton);
+    form.append(headingWrapper, taskTitle, description, priorityDiv, dateInputWrapper, saveButton);
 
     // Add form to container
     todoContainer.appendChild(form);
@@ -108,7 +128,7 @@ export function createTaskForm(todoList, projectId) {
 
     document.addEventListener("click", handleClickOutside);
 
-      closeTaskButton.addEventListener("click", () => {
-    form.remove(); // removes the form
-  });
+    closeTaskButton.addEventListener("click", () => {
+        form.remove(); // removes the form
+    });
 }

@@ -23,7 +23,7 @@ todoStore.push(
     title: "Buy groceries",
     description: "Milk, Eggs, Bread, and Fruits",
     priority: "medium",
-    checklist: false,
+    dueDate: "2025-8-29",
     projectId: "default-project-1",
     taskId: "default-task-1.1"
   },
@@ -31,7 +31,7 @@ todoStore.push(
     title: "Morning workout",
     description: "30 minutes cardio",
     priority: "high",
-    checklist: false,
+    dueDate: "2025-8-29",
     projectId: "default-project-1",
     taskId: "default-task-1.2"
   },
@@ -39,7 +39,7 @@ todoStore.push(
     title: "Finish report",
     description: "Prepare quarterly report for meeting",
     priority: "high",
-    checklist: false,
+    dueDate: "2025-8-29",
     projectId: "default-project-2",
     taskId: "default-task-2.1"
   }
