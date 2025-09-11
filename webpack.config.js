@@ -6,14 +6,14 @@ module.exports = {
   entry: "./src/index.js", // entry point
   output: {
     filename: "main.js", // bundled output file
-    path: path.resolve(__dirname, "dist"), // output folder
-    clean: true, // clean dist before each build
-    publicPath: "/todo-list/", // fix for GitHub Pages
+    path: path.resolve(__dirname, "build"), // output folder (deployable)
+    clean: true, // clean build before each build
+    publicPath: "/todo-list/", // correct path for GitHub Pages
   },
   devtool: "eval-source-map", // good source maps for debugging
   devServer: {
     static: {
-      directory: path.resolve(__dirname, "dist"), // serve built files from dist
+      directory: path.resolve(__dirname, "build"), // match output folder
     },
     port: 8080,
     open: true, // auto-open browser
@@ -22,7 +22,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/template.html", // base HTML file
-      filename: "index.html", // output HTML in dist
+      filename: "index.html", // output HTML in build
     }),
   ],
   module: {

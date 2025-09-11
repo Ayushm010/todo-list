@@ -58,6 +58,6 @@ themeBtn.addEventListener("click", () => {
 // restore theme on reload
 if (localStorage.getItem("theme") === "dark") {
   document.body.classList.add("dark");
-  themeBtn.src = lightModeIcon;
+  themeBtn.src = darkModeIcon;
 } 
 
