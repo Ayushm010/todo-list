@@ -8,22 +8,50 @@ body {
     width: 100%;
     height: 100vh;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: var(--secondary-color);
 }
 
 :root {
     --primary-color: #F9FAFB;
     --secondary-color: #FFFFFF;
     --accent-color: #4CAF50;
-    --text-color: #2C2C2C;
-    --secondary-text-color: var(--primary-color);
+    --text-color: #111827;
+    --secondary-text-color: #374151;
     --muted-text: #6B7280;
     --border-color: #E5E7EB;
 
     --hover-bg: #F3F4F6;
     --danger-color: #EF4444;
     --action-color: #6366F1;
-    --action-hover: #4338CA;
+    --action-hover: #4F46E5;
 }
+
+body.dark {
+    --primary-color: #1F2937;
+    /* Dark background base */
+    --secondary-color: #111827;
+    /* Slightly lighter dark panel */
+    --accent-color: #4CAF50;
+    /* Keep accent color same for contrast */
+    --text-color: #F9FAFB;
+    /* Light text on dark background */
+    --secondary-text-color: #D1D5DB;
+    /* Lighter muted text */
+    --muted-text: #9CA3AF;
+    /* Muted text on dark background */
+    --border-color: #374151;
+    /* Darker borders for separation */
+
+    --hover-bg: #374151;
+    /* Hover background for dark theme */
+    --danger-color: #EF4444;
+    /* Red stays same for alerts */
+    --action-color: #6366F1;
+    /* Keep action button color */
+    --action-hover: #4F46E5;
+    /* Slightly darker hover */
+}
+
 
 
 .container {
@@ -38,7 +66,7 @@ body {
     height: 100vh;
     border-right: 5px solid var(--border-color);
     border-radius: 10px;
-
+    color: var(--text-color);
     background-color: var(--primary-color);
 
 }
@@ -47,6 +75,36 @@ body {
     display: grid;
     gap: 20px;
     margin-bottom: 20px;
+}
+
+.title-box {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+}
+
+.title-box>img {
+    align-self: center;
+}
+
+
+.theme-btn {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.theme-btn .sun {
+  fill: orange;
+  transition: fill 0.3s;
+}
+
+.theme-btn .moon {
+  fill: gray;
+  transition: fill 0.3s;
+}
+
+body.dark .theme-btn .sun {
+  fill: yellow;
 }
 
 form {
@@ -160,6 +218,7 @@ form {
 
 .todo-container {
     background-color: var(--secondary-color);
+    color: var(--text-color);
     margin: 20px;
 }
 
@@ -228,7 +287,7 @@ form {
 .priority-label,
 .duedate-label {
     font-size: 0.9rem;
-    color: var(--muted-text);
+    color: text;
     margin-right: 10px;
 }
 
@@ -320,6 +379,7 @@ form {
 /* Add project button */
 .add-project-btn {
     background-color: transparent;
+    color: var(--text-color);
     border: none;
     text-align: center;
     text-decoration: none;

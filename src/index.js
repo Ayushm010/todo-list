@@ -36,3 +36,28 @@ completedTask.addEventListener("click",()=>{
     console.log(completedTask.id);
     createTodoList(completedTask.id);
 });
+
+//toggle theme
+import lightModeIcon from "./img/light-mode.svg";
+import darkModeIcon from "./img/dark-mode.svg";
+
+const themeBtn = document.querySelector(".theme-btn");
+
+themeBtn.addEventListener("click", () => {
+  if (document.body.classList.contains("dark")) {
+    document.body.classList.remove("dark");
+    localStorage.setItem("theme", "light");
+    themeBtn.src = lightModeIcon;
+  } else {
+    document.body.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+    themeBtn.src = darkModeIcon;
+  }
+});
+
+// restore theme on reload
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark");
+  themeBtn.src = lightModeIcon;
+} 
+

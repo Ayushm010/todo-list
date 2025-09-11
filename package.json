@@ -19,7 +19,7 @@
     "url": "https://github.com/Ayushm010/todo-list/issues"
   },
   "homepage": "https://ayushm010.github.io/todo-list/",
-  "devDependencies": { 
+  "devDependencies": {
     "css-loader": "^7.1.2",
     "gh-pages": "^6.3.0",
     "html-loader": "^5.1.0",

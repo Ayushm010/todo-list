@@ -1,4 +1,3 @@
-// webpack.config.js
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -9,19 +8,21 @@ module.exports = {
     filename: "main.js", // bundled output file
     path: path.resolve(__dirname, "dist"), // output folder
     clean: true, // clean dist before each build
+    publicPath: "/todo-list/", // fix for GitHub Pages
   },
   devtool: "eval-source-map", // good source maps for debugging
   devServer: {
     static: {
-      directory: path.resolve(__dirname, "public"), // serve static assets from /public
+      directory: path.resolve(__dirname, "dist"), // serve built files from dist
     },
-    watchFiles: ["./src/template.html"], // watch HTML file for changes
-    port: 8080, // dev server port
+    port: 8080,
     open: true, // auto-open browser
+    hot: true, // enable hot module replacement
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/template.html", // base HTML file
+      filename: "index.html", // output HTML in dist
     }),
   ],
   module: {
